@@ -12,14 +12,25 @@ namespace NDXSe7en.GuiDemo.Views
 
 		public Model Model { get; private set; }
 
-		public void SelectPatchFile (string patchFile)
+		public async Task SelectPatchFile (string patchFile)
 		{
-			Model.LoadPatch (patchFile);
+			await Model.LoadPatch (patchFile);
 		}
 
 		public void PlayTestSound ()
 		{
 			Model.PlayTestSound ();
+		}
+
+		public async Task SetPatchDirectory (string directory)
+		{
+			await Model.SetPatchDirectory (directory);
+		}
+
+		public async Task StartMain ()
+		{
+			await Model.LoadCachedState ();
+			Model.Synthesizer.Start ();
 		}
 	}
 }

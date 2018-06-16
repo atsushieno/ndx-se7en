@@ -15,6 +15,7 @@ namespace NDXSe7en.GuiDemo.Views
 			var ret = new Menu ();
 			foreach (var subdir in directory.GetDirectories ().Where (d => filter == null || filter (d))) {
 				var dirmenu = new MenuItem (subdir.Name);
+				// This is silly, but in Xwt there is no way to dynamically populate menu items on activating menu item.
 				dirmenu.Clicked += delegate { dirmenu.SubMenu = BuildDirectoryTree (subdir, action, filter); };
 				ret.Items.Add (dirmenu);
 			}

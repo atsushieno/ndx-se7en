@@ -69,6 +69,9 @@ namespace NDXSe7en.GuiDemo
 
 		public void Stop ()
 		{
+			if (State != SynthesizerState.Started)
+				return;
+
 			State = SynthesizerState.Finished;
 			out_stream.Dispose ();
 			soundio.Disconnect ();
