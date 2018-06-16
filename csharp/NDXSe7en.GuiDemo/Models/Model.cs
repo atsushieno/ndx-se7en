@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.IO.IsolatedStorage;
+using Commons.Music.Midi.Mml;
+using Commons.Music.Midi;
 
-namespace NDXSe7en.GuiDemo
+namespace NDXSe7en
 {
 	public class Model
 	{
@@ -37,17 +39,41 @@ namespace NDXSe7en.GuiDemo
 			});
 		}
 
+		public async Task PlayMml (string mml)
+		{
+			await Task.Run (() => {
+				try {
+					var compiler = new MmlCompiler ();
+					Console.WriteLine ("Compiling...");
+					var music = compiler.Compile (false, mml);
+					Console.WriteLine ("Compiled");
+					var player = new MidiPlayer (music);
+					player.EventReceived += (m) => {
+						if (m.Data != null)
+							synthesizer.SendMidi (m.Data, 0, m.Data.Length);
+						else
+							synthesizer.SendMidi (m.StatusByte, m.Msb, m.Lsb);
+					};
+						player.PlayAsync ();
+				} catch (Exception ex) {
+					Console.WriteLine (ex);
+				}
+			});
+		}
+
 		public async Task LoadCachedState ()
 		{
-			using (var store = IsolatedStorageFile.GetUserStoreForAssembly ()) {
-				if (!store.FileExists ("settings.txt"))
-					return;
-				using (var file = store.OpenFile ("settings.txt", FileMode.Open)) {
-					string dir = new StreamReader (file).ReadToEnd ();
-					if (Directory.Exists (dir))
-						await SetPatchDirectory (dir, true);
+			await Task.Run (() => {
+				using (var store = IsolatedStorageFile.GetUserStoreForAssembly ()) {
+					if (!store.FileExists ("settings.txt"))
+						return;
+					using (var file = store.OpenFile ("settings.txt", FileMode.Open)) {
+						string dir = new StreamReader (file).ReadToEnd ();
+						if (Directory.Exists (dir))
+							SetPatchDirectoryInternal (dir, true);
+					}
 				}
-			}
+			});
 		}
 
 		async Task SaveCachedState ()
@@ -64,7 +90,7 @@ namespace NDXSe7en.GuiDemo
 
 		public string PatchDirectory { get; private set; }
 
-		async Task SetPatchDirectory (string directory, bool skipSave)
+		async Task SetPatchDirectoryInternal (string directory, bool skipSave)
 		{
 			PatchDirectory = directory;
 			if (!skipSave)
@@ -74,7 +100,7 @@ namespace NDXSe7en.GuiDemo
 
 		public async Task SetPatchDirectory (string directory)
 		{
-			await SetPatchDirectory (directory, false);
+			await SetPatchDirectoryInternal (directory, false);
 		}
 
 		public event Action PatchDirectoryUpdated;

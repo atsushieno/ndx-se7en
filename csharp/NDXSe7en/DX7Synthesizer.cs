@@ -3,7 +3,7 @@ using SoundIOSharp;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace NDXSe7en.GuiDemo
+namespace NDXSe7en
 {
 	public class DX7Synthesizer
 	{
@@ -28,6 +28,17 @@ namespace NDXSe7en.GuiDemo
 				off += len;
 				remaining -= len;
 			}
+		}
+
+		readonly byte [] msg_store = new byte [3];
+		public void SendMidi (byte statusCode, byte msb, byte lsb)
+		{
+			var type = statusCode & 0xF0;
+			int size = (type == 0xC0 || type == 0xA0) ? 2 : 3;
+			msg_store [0] = statusCode;
+			msg_store [1] = msb;
+			msg_store [2] = lsb;
+			ring_buffer.Write (msg_store, 0, size);
 		}
 
 		public enum SynthesizerState

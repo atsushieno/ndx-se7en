@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xwt;
 using System.IO;
 using System.Linq;

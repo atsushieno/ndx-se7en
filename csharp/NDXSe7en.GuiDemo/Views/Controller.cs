@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 namespace NDXSe7en.GuiDemo.Views
@@ -17,9 +17,9 @@ namespace NDXSe7en.GuiDemo.Views
 			await Model.LoadPatch (patchFile);
 		}
 
-		public void PlayTestSound ()
+		public async Task PlayMml (string mml)
 		{
-			Model.PlayTestSound ();
+			await Model.PlayMml (mml);
 		}
 
 		public async Task SetPatchDirectory (string directory)

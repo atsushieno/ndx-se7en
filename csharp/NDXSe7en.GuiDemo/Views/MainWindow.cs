@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using Xwt;
 using NDXSe7en.GuiDemo.Views;
 using System.IO;
 using System.Threading.Tasks;
+using Xwt.Drawing;
 
 namespace NDXSe7en.GuiDemo
 {
@@ -15,8 +16,8 @@ namespace NDXSe7en.GuiDemo
 			Application.Run ();
 		}
 
-		Model model;
-		Controller controller;
+		readonly Model model;
+		readonly Controller controller;
 
 		public MainWindow ()
 		{
@@ -55,13 +56,27 @@ namespace NDXSe7en.GuiDemo
 
 			model.PatchDirectoryUpdated += delegate { patch.SubMenu = XwtUtility.BuildDirectoryTree (new DirectoryInfo (model.PatchDirectory), s => Task.Run (() => controller.SelectPatchFile (s))); };
 
+			var mainBox = new VBox ();
+
+			var editor = new TextEntry {
+				HeightRequest = 100,
+				PlaceholderText = "(enter MML text here)",
+				TooltipText = "MML to play",
+				MultiLine = true,
+				Text = "1   t120 l2 o5 v120 cdefgab>c"
+			};
+			var scroll = new ScrollView ();
+			scroll.Content = editor;
+			mainBox.PackStart (scroll, true);
+
 			var button = new Button ("PLAY");
 			button.Clicked += delegate {
-				Task.Run (() => controller.PlayTestSound ());
+				Task.Run (() => controller.PlayMml (editor.Text));
 			};
-			this.Content = button;
+			mainBox.PackStart (button, true);
+			this.Content = mainBox;
 
-			controller.StartMain ();
+			controller.StartMain ().Wait ();
 		}
 	}
 }

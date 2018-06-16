@@ -7,13 +7,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.Tests", "NDXSe7en.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.Demo", "NDXSe7en.Demo\NDXSe7en.Demo.csproj", "{DF8395CB-1A0D-455F-9A1D-DF2C04382D37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libsoundio-sharp", "..\external\libsoundio-sharp\dotnetcore\libsoundio-sharp\libsoundio-sharp.csproj", "{446443D3-D226-447E-899A-BEB7C2A95DFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libsoundio-sharp-netcore", "..\external\libsoundio-sharp\dotnetcore\libsoundio-sharp\libsoundio-sharp.csproj", "{446443D3-D226-447E-899A-BEB7C2A95DFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.Demo.NetCore", "NDXSe7en.Demo.NetCore\NDXSe7en.Demo.NetCore.csproj", "{C2DC8C9E-4574-44F4-870F-AB86994E5C87}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.GuiDemo", "NDXSe7en.GuiDemo\NDXSe7en.GuiDemo.csproj", "{89E6994F-6A80-408F-819E-0AF70D63B836}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libdx7-sharp", "libdx7-sharp\libdx7-sharp.csproj", "{320C9E87-DA84-4187-BDBE-C6B7F4AA038D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libdx7-sharp-desktop", "libdx7-sharp-desktop\libdx7-sharp-desktop.csproj", "{6BA90347-9F4A-42CB-8C3F-CC1133EA8668}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.Desktop", "NDXSe7en.Desktop\NDXSe7en.Desktop.csproj", "{1C758F6B-C2B8-46E6-8FC8-7885D8230732}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libsoundio-sharp-desktop", "..\external\libsoundio-sharp\libsoundio-sharp\libsoundio-sharp.csproj", "{D6FB7880-23D7-44B7-827E-A471BA354D92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,5 +55,17 @@ Global
 		{320C9E87-DA84-4187-BDBE-C6B7F4AA038D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{320C9E87-DA84-4187-BDBE-C6B7F4AA038D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{320C9E87-DA84-4187-BDBE-C6B7F4AA038D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BA90347-9F4A-42CB-8C3F-CC1133EA8668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA90347-9F4A-42CB-8C3F-CC1133EA8668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA90347-9F4A-42CB-8C3F-CC1133EA8668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA90347-9F4A-42CB-8C3F-CC1133EA8668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C758F6B-C2B8-46E6-8FC8-7885D8230732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C758F6B-C2B8-46E6-8FC8-7885D8230732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C758F6B-C2B8-46E6-8FC8-7885D8230732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C758F6B-C2B8-46E6-8FC8-7885D8230732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6FB7880-23D7-44B7-827E-A471BA354D92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6FB7880-23D7-44B7-827E-A471BA354D92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6FB7880-23D7-44B7-827E-A471BA354D92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6FB7880-23D7-44B7-827E-A471BA354D92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
