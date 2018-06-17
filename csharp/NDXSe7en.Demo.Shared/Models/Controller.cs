@@ -1,7 +1,8 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-namespace NDXSe7en.GuiDemo.Views
+
+namespace NDXSe7en
 {
 	public class Controller
 	{

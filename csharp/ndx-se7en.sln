@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.Tests", "NDXSe7en.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.Demo", "NDXSe7en.Demo\NDXSe7en.Demo.csproj", "{DF8395CB-1A0D-455F-9A1D-DF2C04382D37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libsoundio-sharp-netcore", "..\external\libsoundio-sharp\dotnetcore\libsoundio-sharp\libsoundio-sharp.csproj", "{446443D3-D226-447E-899A-BEB7C2A95DFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libsoundio-sharp", "..\external\libsoundio-sharp\dotnetcore\libsoundio-sharp\libsoundio-sharp.csproj", "{446443D3-D226-447E-899A-BEB7C2A95DFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.Demo.NetCore", "NDXSe7en.Demo.NetCore\NDXSe7en.Demo.NetCore.csproj", "{C2DC8C9E-4574-44F4-870F-AB86994E5C87}"
 EndProject
@@ -19,7 +19,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libdx7-sharp-desktop", "lib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.Desktop", "NDXSe7en.Desktop\NDXSe7en.Desktop.csproj", "{1C758F6B-C2B8-46E6-8FC8-7885D8230732}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libsoundio-sharp-desktop", "..\external\libsoundio-sharp\libsoundio-sharp\libsoundio-sharp.csproj", "{D6FB7880-23D7-44B7-827E-A471BA354D92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libsoundio-sharp", "..\external\libsoundio-sharp\libsoundio-sharp\libsoundio-sharp.csproj", "{D6FB7880-23D7-44B7-827E-A471BA354D92}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NDXSe7en.Demo.Shared", "NDXSe7en.Demo.Shared\NDXSe7en.Demo.Shared.shproj", "{048DA7C0-F954-4A85-B685-9463103AB889}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.Demo.TerminalClient", "NDXSe7en.Demo.Terminal\NDXSe7en.Demo.TerminalClient.csproj", "{43410A9D-6D4F-4E1E-A0DF-BD5BE8DD45B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,5 +71,9 @@ Global
 		{D6FB7880-23D7-44B7-827E-A471BA354D92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6FB7880-23D7-44B7-827E-A471BA354D92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6FB7880-23D7-44B7-827E-A471BA354D92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43410A9D-6D4F-4E1E-A0DF-BD5BE8DD45B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43410A9D-6D4F-4E1E-A0DF-BD5BE8DD45B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43410A9D-6D4F-4E1E-A0DF-BD5BE8DD45B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43410A9D-6D4F-4E1E-A0DF-BD5BE8DD45B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
