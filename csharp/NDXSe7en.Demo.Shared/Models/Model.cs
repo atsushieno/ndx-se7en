@@ -44,9 +44,9 @@ namespace NDXSe7en
 			await Task.Run (() => {
 				try {
 					var compiler = new MmlCompiler ();
-					Console.WriteLine ("Compiling...");
+Console.WriteLine ("Compiling...");
 					var music = compiler.Compile (false, mml);
-					Console.WriteLine ("Compiled");
+Console.WriteLine ("Compiled"); // we're debugging how compilation process gets stuck in the middle...
 					var player = new MidiPlayer (music);
 					player.EventReceived += (m) => {
 						if (m.Data != null)

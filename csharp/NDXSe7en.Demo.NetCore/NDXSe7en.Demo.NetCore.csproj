@@ -23,4 +23,8 @@
       <Link>Program.cs</Link>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="mugene" Version="1.2.0" />
+  </ItemGroup>
+  <Import Project="..\NDXSe7en.Demo.Shared\NDXSe7en.Demo.Shared.projitems" Label="Shared" Condition="Exists('..\NDXSe7en.Demo.Shared\NDXSe7en.Demo.Shared.projitems')" />
 </Project>

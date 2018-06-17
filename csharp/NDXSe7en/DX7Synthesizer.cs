@@ -67,8 +67,9 @@ namespace NDXSe7en
 			if (!device.SupportsFormat (SoundIOFormat.S16LE))
 				throw new NotSupportedException ();
 			out_stream.Format = SoundIOFormat.S16LE;
+			out_stream.SampleRate = 44100;
 			out_stream.WriteCallback = (min, max) => WriteCallback (min, max);
-			out_stream.UnderflowCallback = () => { Debug.WriteLine ("underflow"); };
+			out_stream.UnderflowCallback = () => { Console.WriteLine ("underflow"); };
 			out_stream.ErrorCallback = () => {
 				throw new DX7SynthesizerException ($"ERROR at libsoundio: {out_stream.LayoutErrorMessage}");
 			};
@@ -89,29 +90,32 @@ namespace NDXSe7en
 			soundio.Dispose ();
 		}
 
-		short [] samples = new short [8192 * 3];
+		short [] samples = new short [8192 * 10];
 
 		void WriteCallback (int min, int max)
 		{
 			if (State != SynthesizerState.Started)
 				return;
 
-			//if (max - min > samples.Length)
-			//	samples = new short [max - min];
+			if (max - min > samples.Length)
+				samples = new short [max - min];
 
-			synth.GetSamples (samples, 0, samples.Length);
-
-			int frameRemaining = max;
-			int frameCount = frameRemaining;
+			int frameRemaining = max - min;
+Console.Write ($"WriteCallback:");
 			while (State == SynthesizerState.Started && frameRemaining > 0) {
+				int frameCount = frameRemaining;
 				var results = out_stream.BeginWrite (ref frameCount);
 				if (frameCount == 0)
 					break;
+Console.WriteLine ($"                  {min}, {max} -> {frameCount} / { frameRemaining}");
 
-				for (int i = 0; i < out_stream.Layout.ChannelCount; i++) {
+				synth.GetSamples (samples, 0, frameCount);
+
+				for (int i = 0; i < results.ChannelCount; i++) {
 					var area = results.GetArea (i);
-					Marshal.Copy (samples, 0, area.Pointer, samples.Length);
-					area.Pointer += area.Step * samples.Length;
+					int len = Math.Min (max - min, results.FrameCount);
+					Marshal.Copy (samples, min, area.Pointer, frameCount);
+					area.Pointer += area.Step * frameCount;
 				}
 
 				out_stream.EndWrite ();

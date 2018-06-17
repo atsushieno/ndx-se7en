@@ -33,5 +33,10 @@ namespace NDXSe7en
 			await Model.LoadCachedState ();
 			Model.Synthesizer.Start ();
 		}
+
+		public async Task StopMain ()
+		{
+			await Task.Run (() => Model.Synthesizer.Stop ());
+		}
 	}
 }

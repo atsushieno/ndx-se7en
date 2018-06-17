@@ -15,6 +15,8 @@ namespace NDXSe7en.Demo
 
 		void Run (string [] args)
 		{
+
+#if false
 			var synthesizer = new DX7Synthesizer ();
 
 			// MIDI sender
@@ -26,7 +28,7 @@ namespace NDXSe7en.Demo
 					synthesizer.SendMidi (sysex, 0, sysex.Length);
 				}
 				for (int i = 0; i < 10; i++) {
-					synthesizer.SendMidi (0x90, (byte) (0x30 + i), 0x60);
+					synthesizer.SendMidi (0x90, (byte)(0x30 + i), 0x60);
 					Thread.Sleep (1000);
 					synthesizer.SendMidi (0x90, (byte)(0x30 + i), 0);
 				}
@@ -40,6 +42,14 @@ namespace NDXSe7en.Demo
 			Console.Read ();
 			Console.WriteLine ("Finishing up");
 			synthesizer.Stop ();
+#else
+			var model = new Model ();
+			var controller = new Controller (model);
+			controller.StartMain ();
+			controller.PlayMml ("1   l2 o4 v120 cdefgab>c");
+			Console.Read ();
+			controller.StopMain ().Wait ();
+#endif
 		}
 	}
 }

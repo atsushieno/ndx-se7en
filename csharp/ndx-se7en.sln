@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libdx7-sharp-desktop", "lib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDXSe7en.Desktop", "NDXSe7en.Desktop\NDXSe7en.Desktop.csproj", "{1C758F6B-C2B8-46E6-8FC8-7885D8230732}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libsoundio-sharp", "..\external\libsoundio-sharp\libsoundio-sharp\libsoundio-sharp.csproj", "{D6FB7880-23D7-44B7-827E-A471BA354D92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libsoundio-sharp-desktop", "..\external\libsoundio-sharp\libsoundio-sharp\libsoundio-sharp.csproj", "{D6FB7880-23D7-44B7-827E-A471BA354D92}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NDXSe7en.Demo.Shared", "NDXSe7en.Demo.Shared\NDXSe7en.Demo.Shared.shproj", "{048DA7C0-F954-4A85-B685-9463103AB889}"
 EndProject
