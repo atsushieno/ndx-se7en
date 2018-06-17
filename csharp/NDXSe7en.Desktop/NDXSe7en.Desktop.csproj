@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>NDXSe7en.Desktop</RootNamespace>
     <AssemblyName>NDXSe7en.Desktop</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

@@ -44,6 +44,10 @@
       <Project>{446443D3-D226-447E-899A-BEB7C2A95DFE}</Project>
       <Name>libsoundio-sharp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NDXSe7en.Desktop\NDXSe7en.Desktop.csproj">
+      <Project>{1C758F6B-C2B8-46E6-8FC8-7885D8230732}</Project>
+      <Name>NDXSe7en.Desktop</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
