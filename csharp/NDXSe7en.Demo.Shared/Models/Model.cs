@@ -41,7 +41,7 @@ namespace NDXSe7en
 
 		public async Task PlayMml (string mml)
 		{
-			await Task.Run (() => {
+			//await Task.Run (() => {
 				try {
 					var compiler = new MmlCompiler ();
 Console.WriteLine ("Compiling...");
@@ -58,7 +58,7 @@ Console.WriteLine ("Compiled"); // we're debugging how compilation process gets 
 				} catch (Exception ex) {
 					Console.WriteLine (ex);
 				}
-			});
+			//});
 		}
 
 		public async Task LoadCachedState ()

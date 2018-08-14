@@ -2,6 +2,8 @@ using System;
 using SoundIOSharp;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace NDXSe7en
 {
@@ -51,12 +53,19 @@ namespace NDXSe7en
 		public SynthesizerState State { get; private set; }
 
 		SoundIOOutStream out_stream;
+		Task audio_loop;
+		ManualResetEvent audio_loop_wait = new ManualResetEvent (false);
 
 		public void Start ()
 		{
 			if (State != SynthesizerState.Initial)
 				return;
+			State = SynthesizerState.Started;
+			audio_loop = Task.Run (() => AudioLoop ());
+		}
 
+		void AudioLoop ()
+		{
 			soundio = new SoundIO ();
 			soundio.Connect ();
 			soundio.FlushEvents ();
@@ -66,6 +75,7 @@ namespace NDXSe7en
 			out_stream = device.CreateOutStream ();
 			if (!device.SupportsFormat (SoundIOFormat.S16LE))
 				throw new NotSupportedException ();
+			out_stream.SoftwareLatency = 0.1; // see https://github.com/andrewrk/libsoundio/issues/149
 			out_stream.Format = SoundIOFormat.S16LE;
 			out_stream.SampleRate = 44100;
 			out_stream.WriteCallback = (min, max) => WriteCallback (min, max);
@@ -74,9 +84,14 @@ namespace NDXSe7en
 				throw new DX7SynthesizerException ($"ERROR at libsoundio: {out_stream.LayoutErrorMessage}");
 			};
 			out_stream.Open ();
-			State = SynthesizerState.Started;
 			out_stream.Start ();
 			soundio.FlushEvents ();
+
+			audio_loop_wait.WaitOne ();
+
+			out_stream.Dispose ();
+			soundio.Disconnect ();
+			soundio.Dispose ();
 		}
 
 		public void Stop ()
@@ -84,10 +99,8 @@ namespace NDXSe7en
 			if (State != SynthesizerState.Started)
 				return;
 
+			audio_loop_wait.Set ();
 			State = SynthesizerState.Finished;
-			out_stream.Dispose ();
-			soundio.Disconnect ();
-			soundio.Dispose ();
 		}
 
 		short [] samples = new short [8192 * 10];
@@ -100,22 +113,18 @@ namespace NDXSe7en
 			if (max - min > samples.Length)
 				samples = new short [max - min];
 
-			int frameRemaining = max - min;
-Console.Write ($"WriteCallback:");
-			while (State == SynthesizerState.Started && frameRemaining > 0) {
+			int frameRemaining = max;
+			while (frameRemaining > 0) {
 				int frameCount = frameRemaining;
 				var results = out_stream.BeginWrite (ref frameCount);
 				if (frameCount == 0)
 					break;
-Console.WriteLine ($"                  {min}, {max} -> {frameCount} / { frameRemaining}");
 
 				synth.GetSamples (samples, 0, frameCount);
 
 				for (int i = 0; i < results.ChannelCount; i++) {
 					var area = results.GetArea (i);
-					int len = Math.Min (max - min, results.FrameCount);
-					Marshal.Copy (samples, min, area.Pointer, frameCount);
-					area.Pointer += area.Step * frameCount;
+					Marshal.Copy (samples, 0, area.Pointer, frameCount);
 				}
 
 				out_stream.EndWrite ();

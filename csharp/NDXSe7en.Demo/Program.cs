@@ -16,7 +16,7 @@ namespace NDXSe7en.Demo
 		void Run (string [] args)
 		{
 
-#if false
+#if true
 			var synthesizer = new DX7Synthesizer ();
 
 			// MIDI sender
